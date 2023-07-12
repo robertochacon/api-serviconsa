@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\EquipmentRentalController;
+use App\Http\Controllers\BillsController;
 use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::post('/register/', [AuthController::class, 'register']);
 Route::group([
     'middleware' => 'api',
 ], function ($router) {
+
     Route::post('/logout/', [AuthController::class, 'logout']);
     Route::post('/refresh/', [AuthController::class, 'refresh']);
     Route::post('/me/', [AuthController::class, 'me']);
@@ -52,6 +54,13 @@ Route::group([
     Route::post('/equipment_rental/', [EquipmentRentalController::class, 'register']);
     Route::put('/equipment_rental/{id}/', [EquipmentRentalController::class, 'update']);
     Route::delete('/equipment_rental/{id}/', [EquipmentRentalController::class, 'delete']);
+
+    //bills
+    Route::get('/bills/', [BillsController::class, 'index']);
+    Route::get('/bills/{id}/', [BillsController::class, 'watch']);
+    Route::post('/bills/', [BillsController::class, 'register']);
+    Route::put('/bills/{id}/', [BillsController::class, 'update']);
+    Route::delete('/bills/{id}/', [BillsController::class, 'delete']);
 
     //users
     Route::get('/users/', [UserController::class, 'index']);
