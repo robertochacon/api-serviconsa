@@ -1,0 +1,1424 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api serviconsa",
+        "description": "<b>Estados:</b> (Enviada, Recibida, Procesando, Finalizada, Rechazada)",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "Sign in",
+                "description": "Login by email, password",
+                "operationId": "authLogin",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "admin@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "admin"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, wrong email address or password. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Register"
+                ],
+                "summary": "User Register",
+                "description": "User Register here",
+                "operationId": "Register",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "department_id",
+                                    "identification",
+                                    "name",
+                                    "email",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "department_id": {
+                                        "type": "number"
+                                    },
+                                    "identification": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "last_name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Register Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Register Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/equipment_rental": {
+            "get": {
+                "tags": [
+                    "EquipmentRental"
+                ],
+                "summary": "All equipment rental",
+                "description": "All equipment rental",
+                "operationId": "all_equipment_rental",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Process"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T00:09:16.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T12:33:45.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model [App\\\\Models\\\\Cliente] #id"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "EquipmentRental"
+                ],
+                "summary": "Store equipment rental",
+                "description": "Store equipment rental",
+                "operationId": "store_equipment_rental",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Name"
+                                    },
+                                    "price": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "price"
+                                    },
+                                    "provider": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "provider"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "phone"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/equipment_rental/{id}": {
+            "get": {
+                "tags": [
+                    "EquipmentRental"
+                ],
+                "summary": "See equipment rental",
+                "description": "See equipment rental",
+                "operationId": "watch_equipment_rental",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Process"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T00:09:16.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T12:33:45.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model [App\\\\Models\\\\Cliente] #id"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "EquipmentRental"
+                ],
+                "summary": "Update equipment rental",
+                "description": "Update equipment rental",
+                "operationId": "update_equipment_rental",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Name"
+                                    },
+                                    "price": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "price"
+                                    },
+                                    "provider": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "provider"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "phone"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "EquipmentRental"
+                ],
+                "summary": "Delete equipment rental",
+                "description": "Delete equipment rental",
+                "operationId": "delete_equipment_rental",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/services": {
+            "get": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "All aservice",
+                "description": "All aservice",
+                "operationId": "all_services",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Process"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T00:09:16.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T12:33:45.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model [App\\\\Models\\\\Cliente] #id"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Store aservice",
+                "description": "Store aservice",
+                "operationId": "store_service",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Description"
+                                    },
+                                    "price": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Price"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/services/{id}": {
+            "get": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "See aservice",
+                "description": "See aservice",
+                "operationId": "watch_service",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Process"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T00:09:16.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T12:33:45.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model [App\\\\Models\\\\Cliente] #id"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Update aservice",
+                "description": "Update aservice",
+                "operationId": "update_service",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Name"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Description"
+                                    },
+                                    "price": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Price"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Services"
+                ],
+                "summary": "Delete aservice",
+                "description": "Delete aservice",
+                "operationId": "delete_service",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/suppliers": {
+            "get": {
+                "tags": [
+                    "Suppliers"
+                ],
+                "summary": "All aservice",
+                "description": "All aservice",
+                "operationId": "all_suppliers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Process"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T00:09:16.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T12:33:45.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model [App\\\\Models\\\\Cliente] #id"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Suppliers"
+                ],
+                "summary": "Store aservice",
+                "description": "Store aservice",
+                "operationId": "store_suppliers",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Name"
+                                    },
+                                    "direction": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "direction"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "phone"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/suppliers/{id}": {
+            "get": {
+                "tags": [
+                    "Suppliers"
+                ],
+                "summary": "See aservice",
+                "description": "See aservice",
+                "operationId": "watch_suppliers",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Process"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T00:09:16.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T12:33:45.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model [App\\\\Models\\\\Cliente] #id"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Suppliers"
+                ],
+                "summary": "Update aservice",
+                "description": "Update aservice",
+                "operationId": "update_suppliers",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Name"
+                                    },
+                                    "direction": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "direction"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "phone"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Suppliers"
+                ],
+                "summary": "Delete aservice",
+                "description": "Delete aservice",
+                "operationId": "delete_suppliers",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "All users",
+                "description": "All users",
+                "operationId": "all_users",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "identification": {
+                                            "type": "string",
+                                            "example": "00000000000"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "example@gmail.com"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "example"
+                                        },
+                                        "role": {
+                                            "type": "string",
+                                            "example": "user"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T00:09:16.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T12:33:45.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/users/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get user",
+                "description": "Get user",
+                "operationId": "watch_users",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "identification": {
+                                            "type": "string",
+                                            "example": "00000000000"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Roberto"
+                                        },
+                                        "role": {
+                                            "type": "string",
+                                            "example": "user"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T00:09:16.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T12:33:45.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model [App\\\\Models\\\\Cliente] #id"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update user",
+                "description": "Update user",
+                "operationId": "update_user",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "department_id": {
+                                        "type": "number",
+                                        "example": "1"
+                                    },
+                                    "identification": {
+                                        "type": "string",
+                                        "example": "00000000000"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Roberto"
+                                    },
+                                    "role": {
+                                        "type": "string",
+                                        "example": "user"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "example": 1
+                                        },
+                                        "departaments": {
+                                            "type": "string",
+                                            "example": "[]"
+                                        },
+                                        "identification": {
+                                            "type": "string",
+                                            "example": "00000000000"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Roberto"
+                                        },
+                                        "role": {
+                                            "type": "string",
+                                            "example": "user"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T00:09:16.000000Z"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "example": "2023-02-23T12:33:45.000000Z"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NOT FOUND",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No query results for model [App\\\\Models\\\\Cliente] #id"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete user",
+                "description": "Delete user",
+                "operationId": "delete_user",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "integer",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "apiAuth": {
+                "type": "http",
+                "description": "Login with email and password to get the authentication token",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
