@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bills;
+use App\Models\Employees;
 use Illuminate\Http\Request;
 
-class BillsController extends Controller
+class EmployeesController extends Controller
 {
 
      /**
      * @OA\Get (
-     *     path="/api/bills",
-     *      operationId="all_bills",
-     *     tags={"Bills"},
+     *     path="/api/employees",
+     *      operationId="all_employees",
+     *     tags={"Employees"},
      *     security={{ "apiAuth": {} }},
-     *     summary="All bills",
-     *     description="All bills",
+     *     summary="All employees",
+     *     description="All employees",
      *     @OA\Response(
      *         response=200,
      *         description="OK",
@@ -37,18 +37,18 @@ class BillsController extends Controller
      */
     public function index()
     {
-        $bills = Bills::all();
-        return response()->json(["data"=>$bills],200);
+        $employees = Employees::all();
+        return response()->json(["data"=>$employees],200);
     }
 
      /**
      * @OA\Get (
-     *     path="/api/bills/{id}",
-     *     operationId="watch_bills",
-     *     tags={"Bills"},
+     *     path="/api/employees/{id}",
+     *     operationId="watch_employees",
+     *     tags={"Employees"},
      *     security={{ "apiAuth": {} }},
-     *     summary="See abills",
-     *     description="See abills",
+     *     summary="See employees",
+     *     description="See employees",
      *    @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -76,7 +76,7 @@ class BillsController extends Controller
      */
     public function watch($id){
         try{
-            $service = Bills::find($id);
+            $service = Employees::find($id);
             return response()->json(["data"=>$service],200);
         }catch (Exception $e) {
             return response()->json(["data"=>"fail"],200);
@@ -85,19 +85,19 @@ class BillsController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/api/bills",
-     *      operationId="store_bills",
-     *      tags={"Bills"},
+     *      path="/api/employees",
+     *      operationId="store_employees",
+     *      tags={"Employees"},
      *     security={{ "apiAuth": {} }},
-     *      summary="Store abills",
-     *      description="Store abills",
+     *      summary="Store employees",
+     *      description="Store employees",
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *            required={"description"},
-     *            @OA\Property(property="description", type="string", format="string", example="Description"),
-     *            @OA\Property(property="price", type="string", format="string", example="Price"),
-     *            @OA\Property(property="type", type="string", format="string", example="diary"),
+     *            required={"name"},
+     *            @OA\Property(property="name", type="string", format="string", example="Name"),
+     *            @OA\Property(property="address", type="string", format="string", example="Address"),
+     *            @OA\Property(property="phone", type="string", format="string", example="Phone"),
      *         ),
      *      ),
      *     @OA\Response(
@@ -111,19 +111,19 @@ class BillsController extends Controller
      */
     public function register(Request $request)
     {
-        $bills = new Bills(request()->all());
-        $bills->save();
-        return response()->json(["data"=>$bills],200);
+        $employees = new Employees(request()->all());
+        $employees->save();
+        return response()->json(["data"=>$employees],200);
     }
 
     /**
      * @OA\Put(
-     *      path="/api/bills/{id}",
-     *      operationId="update_bills",
-     *      tags={"Bills"},
+     *      path="/api/employees/{id}",
+     *      operationId="update_employees",
+     *      tags={"Employees"},
      *     security={{ "apiAuth": {} }},
-     *      summary="Update abills",
-     *      description="Update abills",
+     *      summary="Update employees",
+     *      description="Update employees",
      *     @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -133,10 +133,10 @@ class BillsController extends Controller
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *            required={"description"},
-     *            @OA\Property(property="description", type="string", format="string", example="Description"),
-     *            @OA\Property(property="price", type="string", format="string", example="Price"),
-     *            @OA\Property(property="type", type="string", format="string", example="diary"),
+     *            required={"name"},
+     *            @OA\Property(property="name", type="string", format="string", example="Name"),
+     *            @OA\Property(property="address", type="string", format="string", example="Address"),
+     *            @OA\Property(property="phone", type="string", format="string", example="Phone"),
      *         ),
      *      ),
      *     @OA\Response(
@@ -151,8 +151,8 @@ class BillsController extends Controller
 
     public function update(Request $request, $id){
         try{
-            $bills = Bills::find($id);
-            $bills->update($request->all());
+            $employees = Employees::find($id);
+            $employees->update($request->all());
             return response()->json(["data"=>"ok"],200);
         }catch (Exception $e) {
             return response()->json(["data"=>"fail"],200);
@@ -161,12 +161,12 @@ class BillsController extends Controller
 
     /**
      * @OA\Delete(
-     *      path="/api/bills/{id}",
-     *      operationId="delete_bills",
-     *      tags={"Bills"},
+     *      path="/api/employees/{id}",
+     *      operationId="delete_employees",
+     *      tags={"Employees"},
      *     security={{ "apiAuth": {} }},
-     *      summary="Delete abills",
-     *      description="Delete abills",
+     *      summary="Delete employees",
+     *      description="Delete employees",
      *    @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -185,7 +185,7 @@ class BillsController extends Controller
 
     public function delete($id){
         try{
-            $bills = Bills::destroy($id);
+            $employees = Employees::destroy($id);
             return response()->json(["data"=>"ok"],200);
         }catch (Exception $e) {
             return response()->json(["data"=>"fail"],200);

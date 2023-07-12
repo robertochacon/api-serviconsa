@@ -7,6 +7,8 @@ use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\EquipmentRentalController;
 use App\Http\Controllers\BillsController;
+use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\InvoiceQuoteController;
 use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +63,21 @@ Route::group([
     Route::post('/bills/', [BillsController::class, 'register']);
     Route::put('/bills/{id}/', [BillsController::class, 'update']);
     Route::delete('/bills/{id}/', [BillsController::class, 'delete']);
+
+    //employees
+    Route::get('/employees/', [EmployeesController::class, 'index']);
+    Route::get('/employees/{id}/', [EmployeesController::class, 'watch']);
+    Route::post('/employees/', [EmployeesController::class, 'register']);
+    Route::put('/employees/{id}/', [EmployeesController::class, 'update']);
+    Route::delete('/employees/{id}/', [EmployeesController::class, 'delete']);
+
+    //invoice_quote
+    Route::get('/invoice_quote/', [InvoiceQuoteController::class, 'index']);
+    Route::get('/invoice_quote/{id}/', [InvoiceQuoteController::class, 'watch']);
+    Route::post('/invoice_quote/', [InvoiceQuoteController::class, 'register']);
+    Route::put('/invoice_quote/{id}/', [InvoiceQuoteController::class, 'update']);
+    Route::delete('/invoice_quote/{id}/', [InvoiceQuoteController::class, 'delete']);
+
 
     //users
     Route::get('/users/', [UserController::class, 'index']);

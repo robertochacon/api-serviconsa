@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bills;
+use App\Models\InvoiceQuote;
 use Illuminate\Http\Request;
 
-class BillsController extends Controller
+class InvoiceQuoteController extends Controller
 {
 
      /**
      * @OA\Get (
-     *     path="/api/bills",
-     *      operationId="all_bills",
-     *     tags={"Bills"},
+     *     path="/api/invoice_quote",
+     *      operationId="all_invoice_quote",
+     *     tags={"InvoiceQuote"},
      *     security={{ "apiAuth": {} }},
-     *     summary="All bills",
-     *     description="All bills",
+     *     summary="All invoice_quote",
+     *     description="All invoice_quote",
      *     @OA\Response(
      *         response=200,
      *         description="OK",
@@ -37,18 +37,18 @@ class BillsController extends Controller
      */
     public function index()
     {
-        $bills = Bills::all();
-        return response()->json(["data"=>$bills],200);
+        $invoice_quote = InvoiceQuote::all();
+        return response()->json(["data"=>$invoice_quote],200);
     }
 
      /**
      * @OA\Get (
-     *     path="/api/bills/{id}",
-     *     operationId="watch_bills",
-     *     tags={"Bills"},
+     *     path="/api/invoice_quote/{id}",
+     *     operationId="watch_invoice_quote",
+     *     tags={"InvoiceQuote"},
      *     security={{ "apiAuth": {} }},
-     *     summary="See abills",
-     *     description="See abills",
+     *     summary="See ainvoice_quote",
+     *     description="See ainvoice_quote",
      *    @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -76,7 +76,7 @@ class BillsController extends Controller
      */
     public function watch($id){
         try{
-            $service = Bills::find($id);
+            $service = InvoiceQuote::find($id);
             return response()->json(["data"=>$service],200);
         }catch (Exception $e) {
             return response()->json(["data"=>"fail"],200);
@@ -85,19 +85,24 @@ class BillsController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/api/bills",
-     *      operationId="store_bills",
-     *      tags={"Bills"},
+     *      path="/api/invoice_quote",
+     *      operationId="store_invoice_quote",
+     *      tags={"InvoiceQuote"},
      *     security={{ "apiAuth": {} }},
-     *      summary="Store abills",
-     *      description="Store abills",
+     *      summary="Store ainvoice_quote",
+     *      description="Store ainvoice_quote",
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *            required={"description"},
-     *            @OA\Property(property="description", type="string", format="string", example="Description"),
-     *            @OA\Property(property="price", type="string", format="string", example="Price"),
-     *            @OA\Property(property="type", type="string", format="string", example="diary"),
+     *            required={"attended"},
+     *            @OA\Property(property="client", type="string", format="string", example="client"),
+     *            @OA\Property(property="attended", type="string", format="string", example="attended"),
+     *            @OA\Property(property="taxes", type="string", format="string", example="taxes"),
+     *            @OA\Property(property="discount", type="string", format="string", example="discount"),
+     *            @OA\Property(property="total", type="string", format="string", example="total"),
+     *            @OA\Property(property="observation", type="string", format="string", example="observation"),
+     *            @OA\Property(property="terms", type="string", format="string", example="terms"),
+     *            @OA\Property(property="type", type="string", format="string", example="quote"),
      *         ),
      *      ),
      *     @OA\Response(
@@ -111,19 +116,19 @@ class BillsController extends Controller
      */
     public function register(Request $request)
     {
-        $bills = new Bills(request()->all());
-        $bills->save();
-        return response()->json(["data"=>$bills],200);
+        $invoice_quote = new InvoiceQuote(request()->all());
+        $invoice_quote->save();
+        return response()->json(["data"=>$invoice_quote],200);
     }
 
     /**
      * @OA\Put(
-     *      path="/api/bills/{id}",
-     *      operationId="update_bills",
-     *      tags={"Bills"},
+     *      path="/api/invoice_quote/{id}",
+     *      operationId="update_invoice_quote",
+     *      tags={"InvoiceQuote"},
      *     security={{ "apiAuth": {} }},
-     *      summary="Update abills",
-     *      description="Update abills",
+     *      summary="Update ainvoice_quote",
+     *      description="Update ainvoice_quote",
      *     @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -133,10 +138,16 @@ class BillsController extends Controller
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *            required={"description"},
-     *            @OA\Property(property="description", type="string", format="string", example="Description"),
-     *            @OA\Property(property="price", type="string", format="string", example="Price"),
-     *            @OA\Property(property="type", type="string", format="string", example="diary"),
+     *            required={"attended"},
+     *            @OA\Property(property="client", type="string", format="string", example="client"),
+     *            @OA\Property(property="attended", type="string", format="string", example="attended"),
+     *            @OA\Property(property="taxes", type="string", format="string", example="taxes"),
+     *            @OA\Property(property="discount", type="string", format="string", example="discount"),
+     *            @OA\Property(property="total", type="string", format="string", example="total"),
+     *            @OA\Property(property="observation", type="string", format="string", example="observation"),
+     *            @OA\Property(property="terms", type="string", format="string", example="terms"),
+     *            @OA\Property(property="type", type="string", format="string", example="quote"),
+     *            @OA\Property(property="status", type="string", format="string", example="status"),
      *         ),
      *      ),
      *     @OA\Response(
@@ -151,8 +162,8 @@ class BillsController extends Controller
 
     public function update(Request $request, $id){
         try{
-            $bills = Bills::find($id);
-            $bills->update($request->all());
+            $invoice_quote = InvoiceQuote::find($id);
+            $invoice_quote->update($request->all());
             return response()->json(["data"=>"ok"],200);
         }catch (Exception $e) {
             return response()->json(["data"=>"fail"],200);
@@ -161,12 +172,12 @@ class BillsController extends Controller
 
     /**
      * @OA\Delete(
-     *      path="/api/bills/{id}",
-     *      operationId="delete_bills",
-     *      tags={"Bills"},
+     *      path="/api/invoice_quote/{id}",
+     *      operationId="delete_invoice_quote",
+     *      tags={"InvoiceQuote"},
      *     security={{ "apiAuth": {} }},
-     *      summary="Delete abills",
-     *      description="Delete abills",
+     *      summary="Delete ainvoice_quote",
+     *      description="Delete ainvoice_quote",
      *    @OA\Parameter(
      *         in="path",
      *         name="id",
@@ -185,7 +196,7 @@ class BillsController extends Controller
 
     public function delete($id){
         try{
-            $bills = Bills::destroy($id);
+            $invoice_quote = InvoiceQuote::destroy($id);
             return response()->json(["data"=>"ok"],200);
         }catch (Exception $e) {
             return response()->json(["data"=>"fail"],200);
