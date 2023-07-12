@@ -1187,13 +1187,13 @@
                                         "example": "taxes"
                                     },
                                     "discount": {
-                                        "type": "string",
-                                        "format": "string",
+                                        "type": "number",
+                                        "format": "number",
                                         "example": "discount"
                                     },
                                     "total": {
-                                        "type": "string",
-                                        "format": "string",
+                                        "type": "number",
+                                        "format": "number",
                                         "example": "total"
                                     },
                                     "observation": {
@@ -1357,13 +1357,13 @@
                                         "example": "taxes"
                                     },
                                     "discount": {
-                                        "type": "string",
-                                        "format": "string",
+                                        "type": "number",
+                                        "format": "number",
                                         "example": "discount"
                                     },
                                     "total": {
-                                        "type": "string",
-                                        "format": "string",
+                                        "type": "number",
+                                        "format": "number",
                                         "example": "total"
                                     },
                                     "observation": {

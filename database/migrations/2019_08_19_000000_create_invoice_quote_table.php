@@ -18,8 +18,8 @@ class CreateInvoiceQuoteTable extends Migration
             $table->string('client')->nullable();
             $table->string('attended')->nullable();
             $table->string('taxes')->nullable();
-            $table->string('discount')->nullable();
-            $table->string('total')->nullable();
+            $table->integer('discount')->nullable();
+            $table->integer('total')->nullable();
             $table->string('observation')->nullable();
             $table->string('terms')->nullable();
             $table->enum('type',['invoice','quote'])->default('quote');
