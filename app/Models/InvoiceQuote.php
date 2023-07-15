@@ -9,6 +9,6 @@ class InvoiceQuote extends Model
     protected $table = 'invoice_quote';
 
     protected $fillable = [
-        'id','client','attended','taxes','discount','total','observation','terms','type','status'
+        'id','client','attended','items','taxes','discount','total','observation','terms','type','status'
     ];
 }

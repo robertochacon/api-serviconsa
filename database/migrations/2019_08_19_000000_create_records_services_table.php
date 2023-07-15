@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateServicesTable extends Migration
+class CreateRecordsServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('records_services', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('id_invoice_quote')->nullable();
+            $table->foreign('id_invoice_quote')->references('id')->on('invoice_quote');
             $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->integer('price')->nullable();
-            $table->enum('status',['active','inactive'])->default('active');
+            $table->integer('amount')->nullable();
+            $table->integer('total')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +33,6 @@ class CreateServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('records_services');
     }
 }

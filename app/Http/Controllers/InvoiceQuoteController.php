@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\InvoiceQuote;
+use App\Models\RecordsServices;
 use Illuminate\Http\Request;
 
 class InvoiceQuoteController extends Controller
@@ -37,8 +38,13 @@ class InvoiceQuoteController extends Controller
      */
     public function index()
     {
+        $new_array_invoice_quote = [];
         $invoice_quote = InvoiceQuote::all();
-        return response()->json(["data"=>$invoice_quote],200);
+        foreach ($invoice_quote as $key) {
+            $key['items'] = RecordsServices::where('id_invoice_quote', $key['id'])->get();
+            array_push($new_array_invoice_quote, $key);
+        }
+        return response()->json(["data"=>$new_array_invoice_quote],200);
     }
 
      /**
@@ -77,6 +83,7 @@ class InvoiceQuoteController extends Controller
     public function watch($id){
         try{
             $service = InvoiceQuote::find($id);
+            $service['items'] = RecordsServices::where('id_invoice_quote', $service['id'])->get();
             return response()->json(["data"=>$service],200);
         }catch (Exception $e) {
             return response()->json(["data"=>"fail"],200);
@@ -98,11 +105,12 @@ class InvoiceQuoteController extends Controller
      *            @OA\Property(property="client", type="string", format="string", example="client"),
      *            @OA\Property(property="attended", type="string", format="string", example="attended"),
      *            @OA\Property(property="taxes", type="string", format="string", example="taxes"),
-     *            @OA\Property(property="discount", type="number", format="number", example="discount"),
-     *            @OA\Property(property="total", type="number", format="number", example="total"),
+     *            @OA\Property(property="discount", type="number", format="number", example="0"),
+     *            @OA\Property(property="total", type="number", format="number", example="100"),
      *            @OA\Property(property="observation", type="string", format="string", example="observation"),
      *            @OA\Property(property="terms", type="string", format="string", example="terms"),
      *            @OA\Property(property="type", type="string", format="string", example="quote"),
+     *            @OA\Property(property="items", type="string", format="array", example={{"name":"name","description":"description","price":100,"amount":1,"total":100}}),
      *         ),
      *      ),
      *     @OA\Response(
@@ -116,8 +124,15 @@ class InvoiceQuoteController extends Controller
      */
     public function register(Request $request)
     {
-        $invoice_quote = new InvoiceQuote(request()->all());
+        $invoice_quote = new InvoiceQuote($request->except(['items']));
         $invoice_quote->save();
+
+        foreach ($request->items as $item) {
+            $item['id_invoice_quote'] = $invoice_quote->id;
+            $recordService = new RecordsServices($item);
+            $recordService->save();
+        }
+
         return response()->json(["data"=>$invoice_quote],200);
     }
 
@@ -142,12 +157,13 @@ class InvoiceQuoteController extends Controller
      *            @OA\Property(property="client", type="string", format="string", example="client"),
      *            @OA\Property(property="attended", type="string", format="string", example="attended"),
      *            @OA\Property(property="taxes", type="string", format="string", example="taxes"),
-     *            @OA\Property(property="discount", type="number", format="number", example="discount"),
-     *            @OA\Property(property="total", type="number", format="number", example="total"),
+     *            @OA\Property(property="discount", type="number", format="number", example="0"),
+     *            @OA\Property(property="total", type="number", format="number", example="100"),
      *            @OA\Property(property="observation", type="string", format="string", example="observation"),
      *            @OA\Property(property="terms", type="string", format="string", example="terms"),
      *            @OA\Property(property="type", type="string", format="string", example="quote"),
      *            @OA\Property(property="status", type="string", format="string", example="status"),
+     *            @OA\Property(property="items", type="string", format="array", example={{"name":"name","description":"description","price":100,"amount":1,"total":100}}),
      *         ),
      *      ),
      *     @OA\Response(

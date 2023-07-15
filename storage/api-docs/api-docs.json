@@ -1189,12 +1189,12 @@
                                     "discount": {
                                         "type": "number",
                                         "format": "number",
-                                        "example": "discount"
+                                        "example": "0"
                                     },
                                     "total": {
                                         "type": "number",
                                         "format": "number",
-                                        "example": "total"
+                                        "example": "100"
                                     },
                                     "observation": {
                                         "type": "string",
@@ -1210,6 +1210,19 @@
                                         "type": "string",
                                         "format": "string",
                                         "example": "quote"
+                                    },
+                                    "items": {
+                                        "type": "string",
+                                        "format": "array",
+                                        "example": [
+                                            {
+                                                "name": "name",
+                                                "description": "description",
+                                                "price": 100,
+                                                "amount": 1,
+                                                "total": 100
+                                            }
+                                        ]
                                     }
                                 },
                                 "type": "object"
@@ -1359,12 +1372,12 @@
                                     "discount": {
                                         "type": "number",
                                         "format": "number",
-                                        "example": "discount"
+                                        "example": "0"
                                     },
                                     "total": {
                                         "type": "number",
                                         "format": "number",
-                                        "example": "total"
+                                        "example": "100"
                                     },
                                     "observation": {
                                         "type": "string",
@@ -1385,6 +1398,19 @@
                                         "type": "string",
                                         "format": "string",
                                         "example": "status"
+                                    },
+                                    "items": {
+                                        "type": "string",
+                                        "format": "array",
+                                        "example": [
+                                            {
+                                                "name": "name",
+                                                "description": "description",
+                                                "price": 100,
+                                                "amount": 1,
+                                                "total": 100
+                                            }
+                                        ]
                                     }
                                 },
                                 "type": "object"
