@@ -31,14 +31,14 @@ class AuthController extends Controller
      * @OA\Post(
      * path="/api/login",
      * summary="Sign in",
-     * description="Login by email, password",
+     * description="Login by identification, password",
      * operationId="authLogin",
      * tags={"Login"},
      * @OA\RequestBody(
      *    required=true,
      *    @OA\JsonContent(
-     *       required={"email","password"},
-     *       @OA\Property(property="email", type="string", format="email", example="admin@gmail.com"),
+     *       required={"identification","password"},
+     *       @OA\Property(property="identification", type="string", format="identification", example="1234"),
      *       @OA\Property(property="password", type="string", format="password", example="admin"),
      *    ),
      * ),
@@ -54,7 +54,7 @@ class AuthController extends Controller
 
     public function login()
     {
-        $credentials = request(['email', 'password']);
+        $credentials = request(['identification', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['message' => 'Unauthorized'], 401);

@@ -12,7 +12,7 @@
                     "Login"
                 ],
                 "summary": "Sign in",
-                "description": "Login by email, password",
+                "description": "Login by identification, password",
                 "operationId": "authLogin",
                 "requestBody": {
                     "required": true,
@@ -20,14 +20,14 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "email",
+                                    "identification",
                                     "password"
                                 ],
                                 "properties": {
-                                    "email": {
+                                    "identification": {
                                         "type": "string",
-                                        "format": "email",
-                                        "example": "admin@gmail.com"
+                                        "format": "identification",
+                                        "example": "1234"
                                     },
                                     "password": {
                                         "type": "string",
