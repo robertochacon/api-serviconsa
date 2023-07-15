@@ -10,6 +10,7 @@ use App\Http\Controllers\BillsController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\InvoiceQuoteController;
 use App\Http\Controllers\EmployeeExpenseController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +86,9 @@ Route::group([
     Route::post('/employee_expense/', [EmployeeExpenseController::class, 'register']);
     Route::put('/employee_expense/{id}/', [EmployeeExpenseController::class, 'update']);
     Route::delete('/employee_expense/{id}/', [EmployeeExpenseController::class, 'delete']);
+
+    //dashboard
+    Route::get('/dashboard/', [DashboardController::class, 'index']);
 
     //users
     Route::get('/users/', [UserController::class, 'index']);

@@ -94,10 +94,11 @@ class EmployeeExpenseController extends Controller
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *            required={"description"},
+     *            required={"id_employee","description"},
+     *            @OA\Property(property="id_employee", type="number", format="number", example="1"),
      *            @OA\Property(property="description", type="string", format="string", example="Description"),
-     *            @OA\Property(property="price", type="string", format="string", example="Price"),
-     *            @OA\Property(property="type", type="string", format="string", example="diary"),
+     *            @OA\Property(property="total", type="number", format="number", example="100"),
+     *            @OA\Property(property="type", type="string", format="string", example="commissions"),
      *         ),
      *      ),
      *     @OA\Response(
@@ -133,10 +134,11 @@ class EmployeeExpenseController extends Controller
      *      @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
-     *            required={"description"},
+     *            required={"id_employee","description"},
+     *            @OA\Property(property="id_employee", type="number", format="number", example="1"),
      *            @OA\Property(property="description", type="string", format="string", example="Description"),
-     *            @OA\Property(property="price", type="string", format="string", example="Price"),
-     *            @OA\Property(property="type", type="string", format="string", example="diary"),
+     *            @OA\Property(property="total", type="number", format="number", example="100"),
+     *            @OA\Property(property="type", type="string", format="string", example="commissions"),
      *         ),
      *      ),
      *     @OA\Response(
