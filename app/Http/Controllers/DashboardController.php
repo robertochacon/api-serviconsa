@@ -9,6 +9,7 @@ use App\Models\InvoiceQuote;
 use App\Models\EquipmentRental;
 use App\Models\Services;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -16,7 +17,7 @@ class DashboardController extends Controller
      /**
      * @OA\Get (
      *     path="/api/dashboard",
-     *      operationId="all_bills",
+     *      operationId="dashboard",
      *     tags={"Dashboard"},
      *     security={{ "apiAuth": {} }},
      *     summary="All dashboard",
@@ -37,6 +38,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
+
+        // $data[] = DB::select("SELECT SUM(total) as day, COUNT(id) as total_day FROM orders WHERE DATE(created_at) = CURDATE() AND status = 'Facturada'");
+        // $data[] = DB::select("SELECT SUM(total) as week, COUNT(id) as total_week FROM orders WHERE YEARWEEK(`created_at`, 1) = YEARWEEK(CURDATE(), 1) AND status = 'Facturada'");
+        // $data[] = DB::select("SELECT SUM(total) as month, COUNT(id) as total_month FROM orders WHERE MONTH(created_at) = MONTH(CURRENT_DATE()) AND YEAR(created_at) = YEAR(CURRENT_DATE()) AND status = 'Facturada'");
+
         $data['bills'] = count(Bills::all());
         return response()->json(["data"=>$data],200);
     }
