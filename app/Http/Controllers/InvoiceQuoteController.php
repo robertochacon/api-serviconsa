@@ -127,10 +127,12 @@ class InvoiceQuoteController extends Controller
         $invoice_quote = new InvoiceQuote($request->except(['items']));
         $invoice_quote->save();
 
-        foreach ($request->items as $item) {
-            $item['id_invoice_quote'] = $invoice_quote->id;
-            $recordService = new RecordsServices($item);
-            $recordService->save();
+        if (is_array($request->items)) {
+            foreach ($request->items as $item) {
+                $item['id_invoice_quote'] = $invoice_quote->id;
+                $recordService = new RecordsServices($item);
+                $recordService->save();
+            }
         }
 
         return response()->json(["data"=>$invoice_quote],200);
