@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employees;
+use App\Models\EmployeeExpense;
 use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
@@ -37,8 +38,13 @@ class EmployeesController extends Controller
      */
     public function index()
     {
+        $new_array_employees = [];
         $employees = Employees::all();
-        return response()->json(["data"=>$employees],200);
+        foreach ($employees as $key) {
+            $key['items'] = EmployeeExpense::where('id_employee', $key['id'])->limit(50)->orderBy('id', 'DESC')->get();
+            array_push($new_array_employees, $key);
+        }
+        return response()->json(["data"=>$new_array_employees],200);
     }
 
      /**
@@ -76,8 +82,9 @@ class EmployeesController extends Controller
      */
     public function watch($id){
         try{
-            $service = Employees::find($id);
-            return response()->json(["data"=>$service],200);
+            $employee = Employees::with('expense')->find($id);
+            $employee['items'] = EmployeeExpense::where('id_employee', $employee['id'])->limit(50)->orderBy('id', 'DESC')->get();
+            return response()->json(["data"=>$employee],200);
         }catch (Exception $e) {
             return response()->json(["data"=>"fail"],200);
         }

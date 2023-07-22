@@ -127,10 +127,13 @@ class InvoiceQuoteController extends Controller
         $invoice_quote = new InvoiceQuote($request->except(['items']));
         $invoice_quote->save();
 
-        if (is_array($request->items)) {
-            foreach ($request->items as $item) {
-                $item['id_invoice_quote'] = $invoice_quote->id;
-                $recordService = new RecordsServices($item);
+        $items = json_decode($request->items);
+        
+        if (is_array($items)) {
+            foreach ($items as $item) {
+                $item->id_invoice_quote = $invoice_quote->id;
+                unset($item->id);
+                $recordService = new RecordsServices((array)$item);
                 $recordService->save();
             }
         }
@@ -180,9 +183,9 @@ class InvoiceQuoteController extends Controller
 
     public function update(Request $request, $id){
         try{
-            $invoice_quote = InvoiceQuote::find($id);
+            $invoice_quote = InvoiceQuote::where('id',$id)->first();
             $invoice_quote->update($request->all());
-            return response()->json(["data"=>"ok"],200);
+            return response()->json(["data"=>$request->type],200);
         }catch (Exception $e) {
             return response()->json(["data"=>"fail"],200);
         }
