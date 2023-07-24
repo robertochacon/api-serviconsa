@@ -38,13 +38,21 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        try{
+            //invoice
+            $data['invoice'][] = DB::select("SELECT SUM(total) as day, COUNT(id) as total_day FROM invoice_quote WHERE DATE(created_at) = CURDATE() AND type = 'invoice'");
+            $data['invoice'][] = DB::select("SELECT SUM(total) as week, COUNT(id) as total_week FROM invoice_quote WHERE YEARWEEK(`created_at`, 1) = YEARWEEK(CURDATE(), 1) AND type = 'invoice'");
+            $data['invoice'][] = DB::select("SELECT SUM(total) as month, COUNT(id) as total_month FROM invoice_quote WHERE MONTH(created_at) = MONTH(CURRENT_DATE()) AND YEAR(created_at) = YEAR(CURRENT_DATE()) AND type = 'invoice'");
+            //quote
+            $data['quote'][] = DB::select("SELECT SUM(total) as day, COUNT(id) as total_day FROM invoice_quote WHERE DATE(created_at) = CURDATE() AND type = 'quote'");
+            $data['quote'][] = DB::select("SELECT SUM(total) as week, COUNT(id) as total_week FROM invoice_quote WHERE YEARWEEK(`created_at`, 1) = YEARWEEK(CURDATE(), 1) AND type = 'quote'");
+            $data['quote'][] = DB::select("SELECT SUM(total) as month, COUNT(id) as total_month FROM invoice_quote WHERE MONTH(created_at) = MONTH(CURRENT_DATE()) AND YEAR(created_at) = YEAR(CURRENT_DATE()) AND type = 'quote'");
 
-        // $data[] = DB::select("SELECT SUM(total) as day, COUNT(id) as total_day FROM orders WHERE DATE(created_at) = CURDATE() AND status = 'Facturada'");
-        // $data[] = DB::select("SELECT SUM(total) as week, COUNT(id) as total_week FROM orders WHERE YEARWEEK(`created_at`, 1) = YEARWEEK(CURDATE(), 1) AND status = 'Facturada'");
-        // $data[] = DB::select("SELECT SUM(total) as month, COUNT(id) as total_month FROM orders WHERE MONTH(created_at) = MONTH(CURRENT_DATE()) AND YEAR(created_at) = YEAR(CURRENT_DATE()) AND status = 'Facturada'");
+            return response()->json(["data"=>$data],200);
+        }catch (Exception $e) {
+            return response()->json(["data"=>[]],200);
+        }
 
-        $data['bills'] = count(Bills::all());
-        return response()->json(["data"=>$data],200);
     }
 
 }
