@@ -338,7 +338,7 @@
                     }
                 ]
             },
-            "put": {
+            "post": {
                 "tags": [
                     "Bills"
                 ],
@@ -699,7 +699,7 @@
                     }
                 ]
             },
-            "put": {
+            "post": {
                 "tags": [
                     "EmployeeExpense"
                 ],
@@ -1019,7 +1019,7 @@
                     }
                 ]
             },
-            "put": {
+            "post": {
                 "tags": [
                     "Employees"
                 ],
@@ -1338,7 +1338,7 @@
                     }
                 ]
             },
-            "put": {
+            "post": {
                 "tags": [
                     "EquipmentRental"
                 ],
@@ -1695,7 +1695,7 @@
                     }
                 ]
             },
-            "put": {
+            "post": {
                 "tags": [
                     "InvoiceQuote"
                 ],
@@ -2052,7 +2052,7 @@
                     }
                 ]
             },
-            "put": {
+            "post": {
                 "tags": [
                     "Services"
                 ],
@@ -2366,7 +2366,7 @@
                     }
                 ]
             },
-            "put": {
+            "post": {
                 "tags": [
                     "Suppliers"
                 ],
@@ -2644,7 +2644,7 @@
                     }
                 ]
             },
-            "put": {
+            "post": {
                 "tags": [
                     "Users"
                 ],

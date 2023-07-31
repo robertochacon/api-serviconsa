@@ -117,7 +117,7 @@ class SuppliersController extends Controller
     }
 
     /**
-     * @OA\Put(
+     * @OA\Post(
      *      path="/api/suppliers/{id}",
      *      operationId="update_suppliers",
      *      tags={"Suppliers"},
@@ -151,7 +151,7 @@ class SuppliersController extends Controller
 
     public function update(Request $request, $id){
         try{
-            $suppliers = suppliers::find($id);
+            $suppliers = suppliers::where('id',$id)->first();
             $suppliers->update($request->all());
             return response()->json(["data"=>"ok"],200);
         }catch (Exception $e) {

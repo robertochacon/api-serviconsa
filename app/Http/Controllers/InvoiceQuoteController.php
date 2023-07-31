@@ -142,7 +142,7 @@ class InvoiceQuoteController extends Controller
     }
 
     /**
-     * @OA\Put(
+     * @OA\Post(
      *      path="/api/invoice_quote/{id}",
      *      operationId="update_invoice_quote",
      *      tags={"InvoiceQuote"},

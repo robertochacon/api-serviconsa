@@ -43,6 +43,7 @@ class DashboardController extends Controller
             $data['invoice'][] = DB::select("SELECT SUM(total) as day, COUNT(id) as total_day FROM invoice_quote WHERE DATE(created_at) = CURDATE() AND type = 'invoice'");
             $data['invoice'][] = DB::select("SELECT SUM(total) as week, COUNT(id) as total_week FROM invoice_quote WHERE YEARWEEK(`created_at`, 1) = YEARWEEK(CURDATE(), 1) AND type = 'invoice'");
             $data['invoice'][] = DB::select("SELECT SUM(total) as month, COUNT(id) as total_month FROM invoice_quote WHERE MONTH(created_at) = MONTH(CURRENT_DATE()) AND YEAR(created_at) = YEAR(CURRENT_DATE()) AND type = 'invoice'");
+            
             //quote
             $data['quote'][] = DB::select("SELECT SUM(total) as day, COUNT(id) as total_day FROM invoice_quote WHERE DATE(created_at) = CURDATE() AND type = 'quote'");
             $data['quote'][] = DB::select("SELECT SUM(total) as week, COUNT(id) as total_week FROM invoice_quote WHERE YEARWEEK(`created_at`, 1) = YEARWEEK(CURDATE(), 1) AND type = 'quote'");

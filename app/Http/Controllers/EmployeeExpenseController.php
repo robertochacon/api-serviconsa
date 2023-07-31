@@ -118,7 +118,7 @@ class EmployeeExpenseController extends Controller
     }
 
     /**
-     * @OA\Put(
+     * @OA\Post(
      *      path="/api/employee_expense/{id}",
      *      operationId="update_employee_expense",
      *      tags={"EmployeeExpense"},
@@ -153,7 +153,7 @@ class EmployeeExpenseController extends Controller
 
     public function update(Request $request, $id){
         try{
-            $employee_expense = EmployeeExpense::find($id);
+            $employee_expense = EmployeeExpense::where('id',$id)->first();
             $employee_expense->update($request->all());
             return response()->json(["data"=>"ok"],200);
         }catch (Exception $e) {

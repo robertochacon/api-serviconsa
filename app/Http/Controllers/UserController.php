@@ -94,7 +94,7 @@ class UserController extends Controller
     }
 
     /**
-     * @OA\Put (
+     * @OA\Post (
      *     path="/api/users/{id}",
      *      operationId="update_user",
      *     tags={"Users"},
@@ -141,8 +141,12 @@ class UserController extends Controller
 
     public function update(Request $request, $id){
         try{
-            $user = User::find($id);
-            $user->update($request->all());
+            $data = $request->all();
+            $user = User::where('id',$id)->first();
+            // if (!isset($request->password)) {
+            //     $data['password'] = bcrypt($request->password);
+            // }
+            $user->update($data);
             return response()->json(["data"=>"ok"],200);
         }catch (Exception $e) {
             return response()->json(["data"=>"none"],200);

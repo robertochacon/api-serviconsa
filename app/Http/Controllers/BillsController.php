@@ -117,7 +117,7 @@ class BillsController extends Controller
     }
 
     /**
-     * @OA\Put(
+     * @OA\Post(
      *      path="/api/bills/{id}",
      *      operationId="update_bills",
      *      tags={"Bills"},
@@ -151,7 +151,7 @@ class BillsController extends Controller
 
     public function update(Request $request, $id){
         try{
-            $bills = Bills::find($id);
+            $bills = Bills::where('id',$id)->first();
             $bills->update($request->all());
             return response()->json(["data"=>"ok"],200);
         }catch (Exception $e) {

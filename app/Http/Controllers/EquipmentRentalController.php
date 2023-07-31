@@ -118,7 +118,7 @@ class EquipmentRentalController extends Controller
     }
 
     /**
-     * @OA\Put(
+     * @OA\Post(
      *      path="/api/equipment_rental/{id}",
      *      operationId="update_equipment_rental",
      *      tags={"EquipmentRental"},
@@ -153,7 +153,7 @@ class EquipmentRentalController extends Controller
 
     public function update(Request $request, $id){
         try{
-            $equipment_rental = EquipmentRental::find($id);
+            $equipment_rental = EquipmentRental::where('id',$id)->first();
             $equipment_rental->update($request->all());
             return response()->json(["data"=>"ok"],200);
         }catch (Exception $e) {
