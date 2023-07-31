@@ -95,5 +95,6 @@ Route::group([
     Route::get('/users/{id}/', [UserController::class, 'watch']);
     Route::post('/users/{id}/', [UserController::class, 'update']);
     Route::delete('/users/{id}/', [UserController::class, 'delete']);
+    Route::post('/users/reset_password/{id}/', [UserController::class, 'reset_password']);
 
 });

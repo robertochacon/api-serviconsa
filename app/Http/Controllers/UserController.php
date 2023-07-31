@@ -185,4 +185,13 @@ class UserController extends Controller
             return response()->json(["data"=>"none"],200);
         }
     }
+
+    public function reset_password(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->password = bcrypt($request->password);
+        $user->update();
+        return response()->json(["data"=>"ok"],200);
+    }
+    
 }
