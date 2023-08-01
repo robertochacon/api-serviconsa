@@ -16,7 +16,7 @@ class CreateRecordsServicesTable extends Migration
         Schema::create('records_services', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('id_invoice_quote')->nullable();
-            $table->foreign('id_invoice_quote')->references('id')->on('invoice_quote');
+            $table->foreign('id_invoice_quote')->references('id')->on('invoice_quote')->onDelete('cascade');
             $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->integer('price')->nullable();
