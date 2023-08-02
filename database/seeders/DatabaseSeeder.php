@@ -21,10 +21,13 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('services')->insert([
-            ['name' => 'Hormigó(esistencia 180)','description' => 'Hormigó(esistencia 180)','price' => 6700, 'created_at' => date("Y-m-d H:i:s")],
-            ['name' => 'Hormigó(esistencia 210)','description' => 'Hormigó(esistencia 180)','price' => 6800, 'created_at' => date("Y-m-d H:i:s")],
-            ['name' => 'Hormigó(esistencia 240)','description' => 'Hormigó(esistencia 180)','price' => 7500, 'created_at' => date("Y-m-d H:i:s")],
-            ['name' => 'Hormigó(esistencia 280)','description' => 'Hormigó(esistencia 180)','price' => 8400, 'created_at' => date("Y-m-d H:i:s")],
+            ['name' => 'Hormigón(resistencia 180)','description' => 'Hormigón(resistencia 180)','price' => 6700, 'created_at' => date("Y-m-d H:i:s")],
+            ['name' => 'Hormigón(resistencia 210)','description' => 'Hormigón(resistencia 210)','price' => 7200, 'created_at' => date("Y-m-d H:i:s")],
+            ['name' => 'Hormigón(resistencia 240)','description' => 'Hormigón(resistencia 240)','price' => 7500, 'created_at' => date("Y-m-d H:i:s")],
+            ['name' => 'Hormigón(resistencia 280)','description' => 'Hormigón(resistencia 280)','price' => 8400, 'created_at' => date("Y-m-d H:i:s")],
+            ['name' => 'Servicio de pulido 1','description' => 'Servicio de pulido 1','price' => 10000, 'created_at' => date("Y-m-d H:i:s")],
+            ['name' => 'Servicio de pulido 2','description' => 'Servicio de pulido 2','price' => 14000, 'created_at' => date("Y-m-d H:i:s")],
+            ['name' => 'Servicio de pulido mas cortes','description' => 'Servicio de pulido mas cortes','price' => 22000, 'created_at' => date("Y-m-d H:i:s")],
         ]);
 
         DB::table('suppliers')->insert([
