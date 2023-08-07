@@ -20,7 +20,7 @@ class CreateRecordsServicesTable extends Migration
             $table->string('name')->nullable();
             $table->string('description')->nullable();
             $table->integer('price')->nullable();
-            $table->integer('amount')->nullable();
+            $table->float('amount', 8, 2)->nullable();
             $table->integer('total')->nullable();
             $table->timestamps();
         });
